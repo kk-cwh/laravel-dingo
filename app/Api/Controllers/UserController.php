@@ -9,6 +9,7 @@
 namespace App\Api\Controllers;
 
 
+use App\Http\Requests\UserRequest;
 use App\Transformers\UserTransformer;
 use App\User;
 use Illuminate\Http\Request;
@@ -54,7 +55,12 @@ class UserController extends BaseController
 	 */
 	public function store(Request $request)
 	{
-		$inputs = $request->all();
+		$this->validateRequest($request, [
+			'name'     => 'required',
+			'email'    => 'required',
+			'password' => 'required',
+		]);
+		$inputs             = $request->all();
 		$inputs['password'] = Hash::make($inputs['password']);
 		$this->user->fill($inputs)->save();
 		return $this->response->created();
@@ -66,9 +72,9 @@ class UserController extends BaseController
 	 * @param         $id
 	 * @return \Dingo\Api\Http\Response
 	 */
-	public function update(Request $request,$id)
+	public function update(Request $request, $id)
 	{
-		$this->user->where('id',$id)->update($request->only($this->user->getFillable()));
+		$this->user->where('id', $id)->update($request->only($this->user->getFillable()));
 		return $this->response->noContent();
 	}
 

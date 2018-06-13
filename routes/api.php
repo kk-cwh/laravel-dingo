@@ -47,6 +47,13 @@ $api->version('v1', function ($api) {
 		$api->post('tags', 'TagController@store')->name('tags.store');
 		$api->put('tags/{id}', 'TagController@update')->name('tags.update');
 		$api->delete('tags/{id}', 'TagController@destroy')->name('tags.destroy');
+
+		// 分类管理
+		$api->get('categories', 'CategoryController@index')->name('categories.index');
+		$api->get('categories/{id}', 'CategoryController@show')->name('categories.show');
+		$api->post('categories', 'CategoryController@store')->name('categories.store');
+		$api->put('categories/{id}', 'CategoryController@update')->name('categories.update');
+		$api->delete('categories/{id}', 'CategoryController@destroy')->name('tags.destroy');
 	});
 
 	$api->group(['namespace' => 'App\Api\Controllers'], function ($api) {

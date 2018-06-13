@@ -22,8 +22,8 @@ class TagController extends BaseController
      */
     public function index()
     {
-        $links = $this->tag->paginate();
-        return $this->response->paginator($links, new TagTransformer);
+        $tags = $this->tag->paginate();
+        return $this->response->paginator($tags, new TagTransformer);
     }
 
 
@@ -47,8 +47,8 @@ class TagController extends BaseController
      */
     public function show($id)
     {
-        $link = $this->tag->find($id);
-        return $this->response->item($link, new TagTransformer);
+        $tag = $this->tag->find($id);
+        return $this->response->item($tag, new TagTransformer);
     }
 
 
